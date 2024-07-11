@@ -18,7 +18,7 @@ class PostFactory extends Factory
     {
         return [
             'title' => $this->faker->sentence,
-            'content' => $this->faker->paragraphs(3, true),
+            'content' => $this->faker->paragraphs(10, true),
             'status' => $this->faker->randomElement(['draft', 'published']),
             'published_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
         ];

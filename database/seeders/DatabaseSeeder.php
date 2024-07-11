@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create 500 users
+        // Create 50 users
         User::factory(50)->create()->each(function ($user) {
             // Create 100-500 posts for each user
             $posts = Post::factory(rand(100, 500))->create(['user_id' => $user->id]);
