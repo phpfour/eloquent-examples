@@ -16,11 +16,15 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $status = $this->faker->randomElement(['draft', 'published']);
+        $createdAt = $this->faker->dateTimeBetween('-1 month', 'now');
+
         return [
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraphs(10, true),
-            'status' => $this->faker->randomElement(['draft', 'published']),
-            'published_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
+            'status' => $status,
+            'created_at' => $createdAt,
+            'published_at' => $status === 'published' ? $createdAt : null,
         ];
     }
 }
