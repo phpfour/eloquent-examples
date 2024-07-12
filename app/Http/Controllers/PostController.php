@@ -10,6 +10,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::query()
+            ->select('id', 'title', 'published_at', 'status', 'user_id')
             ->with(['user'])
             ->orderBy('published_at', 'desc')
             ->paginate(50);
