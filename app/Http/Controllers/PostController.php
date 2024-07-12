@@ -3,15 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $posts = Post::query()
-            ->select('id', 'title', 'published_at', 'status', 'user_id')
-            ->with(['user'])
+            ->when($request->has('s'), function (Builder $query) use ($request) {
+                return $query->keyword($request->input('s'));
+            })
             ->orderBy('published_at', 'desc')
             ->paginate(50);
 
