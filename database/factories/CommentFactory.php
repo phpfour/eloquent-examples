@@ -18,6 +18,7 @@ class CommentFactory extends Factory
     {
         return [
             'body' => $this->faker->paragraph,
+            'is_approved' => $this->faker->boolean,
         ];
     }
 }
