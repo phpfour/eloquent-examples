@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\QueryBuilders\PostQueryBuilder;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,9 +17,18 @@ class Post extends Model
         'published_at' => 'datetime',
     ];
 
-    public function scopeKeyword(Builder $query, mixed $value): Builder
+    protected $guarded = [
+        'published_at'
+    ];
+
+    protected $hidden = [
+        'published_at'
+    ];
+
+    /** @inheritDoc */
+    public function newEloquentBuilder($query): PostQueryBuilder
     {
-        return $query->where('title', 'like', '%' . $value . '%');
+        return new PostQueryBuilder($query);
     }
 
     public function user(): BelongsTo

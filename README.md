@@ -13,3 +13,10 @@ Then create an account on the application and login to see the examples.
 ## Learn more
 
 Want to learn these in a more structured way? Check out my [Professional Laravel Development](https://cutt.ly/wedevs-laravel) course.
+
+
+## Where to put Business Logic?
+
+- Repository
+- Query Builder
+- Service

@@ -15,6 +15,7 @@
                                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Approved Comment Count</th>
                                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
                                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Publish Date</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>
                                         </tr>
                                         </thead>
                                         <tbody class="divide-y divide-gray-200 bg-white">
@@ -25,6 +26,9 @@
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $post->comments_count }}</td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $post->status }}</td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $post->published_at->toFormattedDateString() }}</td>
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    <a href="{{ route('posts.delete', ['id' => $post->id]) }}" onclick="return confirm('Are you sure?')">Delete</a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                         </tbody>
