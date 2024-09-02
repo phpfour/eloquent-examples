@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Api\PostController as ApiPostController;
+use App\Http\Controllers\ProductPerformanceReportController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,5 @@ Route::prefix('/api')->group(function() {
     Route::get('/posts', [ApiPostController::class, 'index'])->name('api.posts.index');
     Route::get('/posts/{id}', [PostController::class, 'show'])->name('api.posts.show');
 });
+
+Route::any('/reports/product-performance', [ProductPerformanceReportController::class, 'index'])->name('reports.product_performance');
