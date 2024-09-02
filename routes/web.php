@@ -32,3 +32,4 @@ Route::prefix('/api')->group(function() {
 });
 
 Route::any('/reports/product-performance', [ProductPerformanceReportController::class, 'index'])->name('reports.product_performance');
+Route::any('/reports/product-performance-def', [ProductPerformanceReportController::class, 'deferred'])->name('reports.product_performance.def');
