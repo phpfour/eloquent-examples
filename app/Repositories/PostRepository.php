@@ -7,9 +7,9 @@ use Illuminate\Contracts\Database\Query\Builder;
 
 final class PostRepository extends BaseRepository
 {
-    public function __construct()
+    public function __construct(Post $postModel)
     {
-        $this->model = new Post();
+        $this->model = $postModel;
     }
 
     public function getAll(?string $keyword = null)

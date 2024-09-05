@@ -3,11 +3,21 @@
 namespace App\Services;
 
 use App\Models\Post;
+use App\Repositories\PostRepository;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
-final class BlogService
+final readonly class BlogService
 {
+    public function __construct(private PostRepository $postRepository)
+    {
+    }
+
+    public function getAllPosts()
+    {
+        return $this->postRepository->getAll();
+    }
+
     public function getAllPostsWithCommentCount(?string $keyword = null, int $offset = 0, int $limit = 10): Collection
     {
         return Post::query()
