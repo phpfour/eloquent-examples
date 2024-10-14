@@ -9,9 +9,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Post extends Model
+class Post extends BaseEloquentModel
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'content',
+        'status',
+        'published_at',
+    ];
 
     protected $casts = [
         'published_at' => 'datetime',
@@ -40,4 +47,5 @@ class Post extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
 }

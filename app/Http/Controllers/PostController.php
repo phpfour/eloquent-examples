@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\DeletePostAction;
 use App\DataTransferObjects\PostDTO;
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Repositories\PostRepository;
 use App\Services\BlogService;
@@ -32,7 +33,27 @@ class PostController extends Controller
     {
         $post = $repository->findById($id);
 
-        dd($post);
+        activity()->performedOn($post)->log('Post viewed.');
+
+        return view('posts.view', [
+            'post' => $post,
+        ]);
+    }
+
+    public function edit(int $id, PostRepository $repository)
+    {
+        $post = $repository->findById($id);
+
+        return view('posts.edit', [
+            'post' => $post,
+        ]);
+    }
+
+    public function update(int $id, PostRepository $repository, PostRequest $request)
+    {
+        $repository->update($id, $request->validated());
+
+        return redirect()->route('posts.edit', $id);
     }
 
     public function delete(int $id, DeletePostAction $action)

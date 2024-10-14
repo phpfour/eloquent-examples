@@ -23,6 +23,8 @@ class PostController extends Controller
     {
         $post = $repository->findById($id);
 
+        logActivity('Post accessed through API', $post, 'api');
+
         return new JsonResponse($post->toArray());
     }
 }

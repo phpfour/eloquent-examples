@@ -16,6 +16,13 @@ class ProductPerformanceReportController extends Controller
         $startDate = $request->input('start_date', now()->startOfMonth()->toDateString());
         $endDate = $request->input('end_date', now()->endOfMonth()->toDateString());
 
+        if ($request->getMethod() === 'POST') {
+            activity()->withProperties([
+                'start_date' => $startDate,
+                'end_date' => $endDate,
+            ])->log('Product Performance Report executed');
+        }
+
         $key = sha1("product_performance_report_$startDate-$endDate");
 
         $products = Cache::remember($key, 30 * 60, function () use ($startDate, $endDate) {

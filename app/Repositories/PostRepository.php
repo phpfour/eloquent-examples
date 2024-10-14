@@ -12,6 +12,16 @@ final class PostRepository extends BaseRepository
         $this->model = $postModel;
     }
 
+    public function update(int $id, array $data): Post
+    {
+        $post = $this->model->findOrFail($id);
+
+        $post->update($data);
+        $post->save();
+
+        return $post;
+    }
+
     public function getAll(?string $keyword = null)
     {
         return $this->model->query()
